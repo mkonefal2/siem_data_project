@@ -31,8 +31,15 @@ def run_etl(config_path: str = 'config.yaml'):
 
     threat_cfg = config['sources'].get('threatfox')
     if threat_cfg:
-        data = fetch_threatfox(threat_cfg['url'], threat_cfg.get('api_payload', {}))
-        records.extend(parse_threatfox(data, source='threatfox'))
+        try:
+            data = fetch_threatfox(
+                threat_cfg['url'],
+                threat_cfg.get('api_payload', {}),
+                raise_on_fail=False,
+            )
+            records.extend(parse_threatfox(data, source='threatfox'))
+        except Exception as e:
+            logger.error("ThreatFox fetch failed: {}", e)
 
     db_handler.insert_many(records)
 

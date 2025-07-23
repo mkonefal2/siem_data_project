@@ -2,7 +2,7 @@ import requests
 from loguru import logger
 
 
-def fetch_threatfox(url: str, payload: dict, retries: int = 3) -> list[dict]:
+def fetch_threatfox(url: str, payload: dict, retries: int = 3, *, raise_on_fail: bool = True) -> list[dict]:
     for attempt in range(1, retries + 1):
         try:
             logger.info("Fetching ThreatFox data (attempt {}/{})", attempt, retries)
@@ -13,5 +13,8 @@ def fetch_threatfox(url: str, payload: dict, retries: int = 3) -> list[dict]:
         except Exception as e:
             logger.error("Error fetching ThreatFox: {}", e)
             if attempt == retries:
-                raise
+                if raise_on_fail:
+                    raise
+                logger.error("Failed to fetch ThreatFox after {} attempts", retries)
+                return []
     return []
