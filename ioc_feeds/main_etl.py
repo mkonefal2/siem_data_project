@@ -2,11 +2,15 @@ import yaml
 from loguru import logger
 from pathlib import Path
 
-from fetchers.blocklist import fetch_blocklist
-from fetchers.threatfox import fetch_threatfox
-from parsers.blocklist_parser import parse_blocklist
-from parsers.threatfox_parser import parse_threatfox
-from storage.duckdb_handler import DuckDBHandler
+if __package__ is None and __name__ == "__main__":
+    import sys
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from ioc_feeds.fetchers.blocklist import fetch_blocklist
+from ioc_feeds.fetchers.threatfox import fetch_threatfox
+from ioc_feeds.parsers.blocklist_parser import parse_blocklist
+from ioc_feeds.parsers.threatfox_parser import parse_threatfox
+from ioc_feeds.storage.duckdb_handler import DuckDBHandler
 
 
 def load_config(path: str) -> dict:
