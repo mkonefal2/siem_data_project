@@ -7,6 +7,11 @@ sources:
     api_payload:
       query: "get_iocs"
       days: 1
+    # Optional API key for authenticated requests
+    api_key: "YOUR_API_KEY"
+    # Optional custom headers for ThreatFox API
+    headers:
+      Accept: "application/json"
     type: "json"
 output:
   database: "./ioc_feeds/database/ioc_data.duckdb"

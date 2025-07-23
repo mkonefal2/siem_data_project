@@ -31,7 +31,11 @@ def run_etl(config_path: str = 'config.yaml'):
 
     threat_cfg = config['sources'].get('threatfox')
     if threat_cfg:
-        data = fetch_threatfox(threat_cfg['url'], threat_cfg.get('api_payload', {}))
+        data = fetch_threatfox(
+            threat_cfg['url'],
+            threat_cfg.get('api_payload', {}),
+            threat_cfg.get('headers')
+        )
         records.extend(parse_threatfox(data, source='threatfox'))
 
     db_handler.insert_many(records)

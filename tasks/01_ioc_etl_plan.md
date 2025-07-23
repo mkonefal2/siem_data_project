@@ -24,6 +24,10 @@
       api_payload:
         query: "get_iocs"
         days: 1
+      # Optional API key or custom headers
+      api_key: "YOUR_API_KEY"
+      headers:
+        Accept: "application/json"
       type: "json"
     nvd:
       url: "https://services.nvd.nist.gov/rest/json/cves/2.0"
@@ -46,8 +50,8 @@
       response = requests.get(url)
       return response.text.splitlines()
 
-  def fetch_threatfox(url, payload):
-      response = requests.post(url, json=payload)
+  def fetch_threatfox(url, payload, headers=None):
+      response = requests.post(url, json=payload, headers=headers)
       return response.json()['data']
 
   def fetch_nvd_cve(url):
