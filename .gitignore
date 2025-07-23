@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.sqlite
+*.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# DuckDB / SQLite
+*.duckdb
+*.db
+
+# Raporty i dane
+/reports/
+/logs/
+/data/
+/tmp/
+
+# Airflow (jeśli kiedyś dodasz)
+airflow.db
+*.pid
