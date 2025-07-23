@@ -1,0 +1,13 @@
+sources:
+  blocklist_de:
+    url: "https://lists.blocklist.de/lists/all.txt"
+    type: "ip"
+  threatfox:
+    url: "https://threatfox-api.abuse.ch/api/v1/"
+    api_payload:
+      query: "get_iocs"
+      days: 1
+    type: "json"
+output:
+  database: "./ioc_feeds/database/ioc_data.duckdb"
+  csv_backup: "./ioc_feeds/database/ioc_backup.csv"
